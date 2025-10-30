@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function JugadoresPage() {
   // Datos de ejemplo - luego vendrán de la BD
   const jugadoresEjemplo = [
@@ -172,12 +174,12 @@ export default function JugadoresPage() {
 
                 {/* Botones de acción */}
                 <div className="flex gap-2">
-                  <a 
+                  <Link 
                     href={`/jugadores/${jugador.id}`}
                     className="flex-1 bg-primary-600 hover:bg-primary-700 text-white text-center py-2 rounded-lg font-semibold transition-colors duration-200"
                   >
                     Ver Perfil
-                  </a>
+                  </Link>
                   <button className="bg-gray-100 hover:bg-gray-200 text-gray-800 p-2 rounded-lg transition-colors duration-200">
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z" />

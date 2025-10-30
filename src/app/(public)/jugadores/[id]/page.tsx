@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function JugadorPerfilPage({ params }: { params: { id: string } }) {
   // Datos de ejemplo - luego vendrán de la BD
   const jugador = {
@@ -62,7 +64,7 @@ export default function JugadorPerfilPage({ params }: { params: { id: string } }
       <div className="container mx-auto px-4">
         {/* Navegación */}
         <nav className="mb-6">
-          <a 
+          <Link 
             href="/jugadores" 
             className="inline-flex items-center gap-2 text-primary-100 hover:text-white transition-colors duration-200"
           >
@@ -70,7 +72,7 @@ export default function JugadorPerfilPage({ params }: { params: { id: string } }
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
             </svg>
             Volver al plantel
-          </a>
+          </Link>
         </nav>
 
         {/* Header del Jugador */}
