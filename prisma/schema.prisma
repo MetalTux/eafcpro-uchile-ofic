@@ -69,27 +69,24 @@ model match_results {
   matches              matches   @relation(fields: [match_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
 }
 
-/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
 model matches {
-  id                                Int                  @id @default(autoincrement())
-  home_team_id                      Int
-  away_team_id                      Int
-  match_date                        DateTime             @db.Timestamptz(6)
-  venue                             String?              @db.VarChar(100)
-  competition                       String?              @db.VarChar(100)
-  match_day                         Int?
-  status                            String?              @default("scheduled") @db.VarChar(20)
-  created_at                        DateTime?            @default(now()) @db.Timestamptz(6)
-  updated_at                        DateTime?            @default(now()) @db.Timestamptz(6)
-  comments                          comments[]
-  match_results                     match_results?
-  teams_matches_away_team_idToteams teams                @relation("matches_away_team_idToteams", fields: [away_team_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  teams_matches_home_team_idToteams teams                @relation("matches_home_team_idToteams", fields: [home_team_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  player_match_stats                player_match_stats[]
+  id                Int       @id @default(autoincrement())
+  home_team         String    @db.VarChar(100)  // Cambiado de home_team_id
+  away_team         String    @db.VarChar(100)  // Cambiado de away_team_id
+  match_date        DateTime  @db.Timestamptz(6)
+  venue             String?   @db.VarChar(100)
+  competition       String?   @db.VarChar(100)
+  match_day         Int?
+  status            String?   @default("scheduled") @db.VarChar(20)
+  created_at        DateTime? @default(now()) @db.Timestamptz(6)
+  updated_at        DateTime? @default(now()) @db.Timestamptz(6)
+  comments          comments[]
+  match_results     match_results?
+  player_match_stats player_match_stats[]
 
   @@index([match_date], map: "idx_matches_date")
   @@index([status], map: "idx_matches_status")
-  @@index([home_team_id, away_team_id], map: "idx_matches_teams")
+  @@index([home_team, away_team], map: "idx_matches_teams") // Índice actualizado
 }
 
 model player_match_stats {
@@ -122,7 +119,6 @@ model player_season_stats {
   id             Int       @id @default(autoincrement())
   player_id      Int
   season         String    @db.VarChar(9)
-  team_id        Int?
   matches_played Int?      @default(0)
   goals          Int?      @default(0)
   assists        Int?      @default(0)
@@ -132,14 +128,12 @@ model player_season_stats {
   avg_minutes    Decimal?  @default(0) @db.Decimal(4, 1)
   created_at     DateTime? @default(now()) @db.Timestamptz(6)
   players        players   @relation(fields: [player_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
-  teams          teams?    @relation(fields: [team_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
   @@unique([player_id, season])
 }
 
 model players {
   id                  Int                   @id @default(autoincrement())
-  team_id             Int?
   name                String                @db.VarChar(100)
   position            String                @db.VarChar(50)
   jersey_number       Int?
@@ -155,10 +149,8 @@ model players {
   contracts           contracts[]
   player_match_stats  player_match_stats[]
   player_season_stats player_season_stats[]
-  teams               teams?                @relation(fields: [team_id], references: [id], onUpdate: NoAction)
 
   @@index([position], map: "idx_players_position")
-  @@index([team_id], map: "idx_players_team_id")
 }
 
 model posts {
@@ -174,21 +166,6 @@ model posts {
   created_at   DateTime?  @default(now()) @db.Timestamptz(6)
   updated_at   DateTime?  @default(now()) @db.Timestamptz(6)
   comments     comments[]
-}
-
-model teams {
-  id                                  Int                   @id @default(autoincrement())
-  name                                String                @unique @db.VarChar(100)
-  short_name                          String?               @db.VarChar(50)
-  logo_url                            String?               @db.VarChar(255)
-  founded_year                        Int?
-  stadium_name                        String?               @db.VarChar(100)
-  created_at                          DateTime?             @default(now()) @db.Timestamptz(6)
-  updated_at                          DateTime?             @default(now()) @db.Timestamptz(6)
-  matches_matches_away_team_idToteams matches[]             @relation("matches_away_team_idToteams")
-  matches_matches_home_team_idToteams matches[]             @relation("matches_home_team_idToteams")
-  player_season_stats                 player_season_stats[]
-  players                             players[]
 }
 
 model users {
