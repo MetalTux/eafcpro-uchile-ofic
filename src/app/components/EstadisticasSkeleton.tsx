@@ -1,4 +1,4 @@
-export default function EstadisticaSkeleton() {
+export default function EstadisticasSkeleton() {
   return (
     <div className="min-h-screen bg-primary-500 py-8">
       <div className="container mx-auto px-4">
