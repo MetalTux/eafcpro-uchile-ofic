@@ -1,3 +1,4 @@
+// src/app/(public)/jugadores/loading.tsx
 export default function Loading() {
   return (
     <div className="min-h-screen bg-primary-500 py-8">

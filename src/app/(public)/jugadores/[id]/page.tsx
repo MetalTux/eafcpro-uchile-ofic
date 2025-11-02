@@ -1,3 +1,4 @@
+// src/app/(public)/jugadores/[id]/page.tsx
 import Link from "next/link";
 
 export default function JugadorPerfilPage({ params }: { params: { id: string } }) {

@@ -1,3 +1,4 @@
+// src/lib/validations/schemas.ts
 import { z } from 'zod'
 
 // Esquema para Jugadores

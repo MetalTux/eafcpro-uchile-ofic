@@ -1,4 +1,6 @@
 // app/(public)/page.tsx
+import Link from "next/link";
+
 export default function Home() {
   const sections = [
     {
@@ -125,7 +127,7 @@ export default function Home() {
                     {section.description}
                   </p>
                   
-                  <a 
+                  <Link 
                     href={section.href}
                     className="inline-flex items-center gap-2 bg-primary-600 hover:bg-primary-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors duration-200"
                   >
@@ -133,7 +135,7 @@ export default function Home() {
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
-                  </a>
+                  </Link>
                 </div>
               </div>
             ))}
@@ -152,18 +154,18 @@ export default function Home() {
               Mantente actualizado con toda la información del Club Deportivo U. de Chile.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <a 
+              <Link 
                 href="/partidos"
                 className="bg-accent-600 hover:bg-accent-700 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-colors duration-200"
               >
                 Ver Próximos Partidos
-              </a>
-              <a 
+              </Link>
+              <Link 
                 href="/jugadores"
                 className="bg-white hover:bg-gray-100 text-primary-600 px-8 py-4 rounded-lg font-semibold text-lg transition-colors duration-200"
               >
                 Conocer Jugadores
-              </a>
+              </Link>
             </div>
           </div>
         </div>

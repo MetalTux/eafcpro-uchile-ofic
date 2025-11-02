@@ -1,3 +1,4 @@
+// src/app/(public)/jugadores/components/PlayerCard.tsx
 import { players } from '@/generated/prisma/client'
 import Link from 'next/link'
 
