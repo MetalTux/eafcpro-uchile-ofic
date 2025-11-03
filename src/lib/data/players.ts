@@ -2,6 +2,8 @@
 import { prisma } from '../db'
 import { PlayerSchema, PlayerUpdateSchema } from '../validations/schemas'
 import type { players } from '@/generated/prisma/client'
+import type { PlayerWithRelations } from '@/types/player'
+//import type { PlayerWithRelations } from '@/types/player'
 
 export async function getPlayers() {
   return await prisma.players.findMany({
